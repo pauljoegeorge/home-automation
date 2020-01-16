@@ -1,0 +1,31 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    alexa_verifier (1.0.0)
+    mqtt (0.5.0)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    rack (2.1.1)
+    rack-protection (2.0.8.1)
+      rack
+    ralyxa (1.8.0)
+      alexa_verifier (~> 1.0)
+    ruby2_keywords (0.0.2)
+    sinatra (2.0.8.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.8.1)
+      tilt (~> 2.0)
+    tilt (2.0.10)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mqtt
+  rack (>= 2.0.8)
+  ralyxa
+  sinatra
+
+BUNDLED WITH
+   2.0.2
