@@ -1,14 +1,14 @@
 require 'mqtt'
 require 'timeout'
-class Light
+class Tv
   def intialize
     # `off` | `on` | `error`
-    @state = 'off'
+    @state = 'tv_off'
   end
 
   # turn ON/OFF bedroom light
   def self.on(status)
-    message = status ? "on" : "off"
+    message = status ? "tv_on" : "tv_off"
     client = MqttClient.instance.client
     # notify ESP32 to turn "on/off" the light
     client.publish('/request', message)
@@ -31,6 +31,6 @@ class Light
   end
 
   def self.running?
-    @state == 'on'
+    @state == 'tv_on'
   end
 end

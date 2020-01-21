@@ -3,10 +3,12 @@ initialise_wifi()
 mqtt = Mqtt.new
 motor = Motor.new(18, 50, 0, 0) #GPIO pin, frequency, duty_cycle_a, duty_cycle_b
 light = Light.new
+tv = Tv.new
 mqtt_retry = 0
 while true
   if connected_to_network
     if connected_to_mqqt_broker
+      Remote.new
       mqtt_retry = 0
       if mqtt.new_message?
         state =  received_message
@@ -31,11 +33,19 @@ while true
             sleep(1)
           when "on"
             light.update_state(state)
-            turn_light_on()
+            send_signal(0x41B6D52A)
             sleep(1)
           when "off"
             light.update_state(state)
-            turn_light_on()
+            send_signal(0x41B6D52A)
+            sleep(1)
+          when "tv_on"
+            tv.update_state(state)
+            send_signal(0x1A2EEC3B)
+            sleep(1)
+          when "tv_off"
+            tv.update_state(state)
+            send_signal(0x1A2EEC3B)
             sleep(1)
           end
         else
