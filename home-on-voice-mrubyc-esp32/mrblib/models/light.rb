@@ -34,4 +34,11 @@ class Light
   def update_state(state)
     @status = state
   end
+
+  # state: integer
+  # 0: off
+  # 1* on
+  def switch(state)
+    switch_light(state)
+  end
 end
