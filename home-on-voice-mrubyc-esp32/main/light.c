@@ -134,6 +134,15 @@ void rmt_example_nec_tx_task()
     // vTaskDelete(NULL);
 }
 
+static void c_switch_light(struct VM *vm, mrbc_value v[], int argc) {
+  int on = GET_INT_ARG(1);
+  int data = LIGHT_OFF;
+  if(on == 1) {
+    data = LIGHT_ON;
+  }
+  sendNECRCData(data);
+}
+
 // void app_main()
 // {
 //     xTaskCreate(rmt_example_nec_tx_task, "rmt_nec_tx_task", 2048, NULL, 10, NULL);

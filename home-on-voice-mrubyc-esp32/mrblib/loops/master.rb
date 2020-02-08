@@ -29,13 +29,10 @@ while true
           when "stopped"
             motor.update_state(state)
             sleep(1)
-          when "on"
+          when "on", "off"
+            signal = state == "on" ? 1 : 0
             light.update_state(state)
-            turn_light_on()
-            sleep(1)
-          when "off"
-            light.update_state(state)
-            turn_light_on()
+            light.switch(signal)
             sleep(1)
           end
         else
