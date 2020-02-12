@@ -108,35 +108,11 @@ void setup_rmt_config() {
   rmt_driver_install(rmtConfig.channel, 0, 0);
 }
 
-void rmt_example_nec_tx_task(mrb_vm *vm, mrb_value *v, int argc)
+//nec.c
+void c_send_signal(mrb_vm *vm, mrb_value *v, int argc)
 {
-    // vTaskDelay(10);
-    // setup_rmt_config();
-    int signal = GET_INT_ARG(1);
-    printf("0x%x\n", signal);
+    uint32_t send_data = (uint32_t) GET_INT_ARG(1);
     esp_log_level_set(LOG_TAG, ESP_LOG_INFO);
-    uint32_t send_data = LIGHT_ON;
-
-    // while(1) {
-      ESP_LOGI(LOG_TAG, "SEND RMT DATA");
-      // ESP_LOGI(LOG_TAG, "LIGHT");
-
-      sendNECRCData(send_data);
-      // if(send_data == LIGHT_ON) {
-      //   send_data = LIGHT_OFF;
-      // }
-      // else {
-      //   send_data = LIGHT_ON;
-      // }
-
-      // vTaskDelay(5000 / portTICK_PERIOD_MS); //10 sec delay
-
-    // }
-
-    // vTaskDelete(NULL);
+    ESP_LOGI(LOG_TAG, "SEND RMT DATA");
+    sendNECRCData(send_data);
 }
-
-// void app_main()
-// {
-//     xTaskCreate(rmt_example_nec_tx_task, "rmt_nec_tx_task", 2048, NULL, 10, NULL);
-// }

@@ -9,7 +9,7 @@
 #include "wifi.h"
 #include "mqtt_broker.h"
 #include "motor.h"
-#include "light.h"
+#include "nec.h"
 
 #include "models/motor.h"
 #include "models/light.h"
@@ -71,7 +71,7 @@ void app_main(void) {
   mrbc_define_method(0, mrbc_class_object, "set_servo_params", c_servo_params_initialize);
   mrbc_define_method(0, mrbc_class_object, "run_servo", c_run_servo_motor);
   mrbc_define_method(0, mrbc_class_object, "send_notification", c_send_notification);
-  mrbc_define_method(0, mrbc_class_object, "send_signal", rmt_example_nec_tx_task);
+  mrbc_define_method(0, mrbc_class_object, "send_signal", c_send_signal);
   mrbc_define_method(0, mrbc_class_object, "init_rmt_config", setup_rmt_config);
   mrbc_create_task(motor, 0);
   mrbc_create_task(light, 0);
