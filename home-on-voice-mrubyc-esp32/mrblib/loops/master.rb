@@ -21,24 +21,21 @@ while true
                 run_servo(angle) # will run motor
                 sleep(0.002) # Add delay, since it takes time for servo to rotate, generally 100ms/60degree rotation at 5V
             end
-          when "stopped"
-            motor.update_state(state)
-            sleep(1)
           when "on"
             light.update_state(state)
-            send_signal(0x41B6D52A)
+            send_signal(0x41B6D52A) # Switch LIGHT ON
             sleep(1)
           when "off"
             light.update_state(state)
-            send_signal(0x41B6D52A)
+            send_signal(0x41B6D52A)  # Switch LIGHT OFF
             sleep(1)
           when "tv_on"
             tv.update_state(state)
-            send_signal(0x1A2EEC3B)
+            send_signal(0x1A2EEC3B)  # Switch TV ON
             sleep(1)
           when "tv_off"
             tv.update_state(state)
-            send_signal(0x1A2EEC3B)
+            send_signal(0x1A2EEC3B)  # Switch TV OFF
             sleep(1)
           end
         else

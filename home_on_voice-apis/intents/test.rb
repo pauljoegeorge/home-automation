@@ -73,7 +73,7 @@ intent "LightOffIntent" do
 end
 
 intent "TvOnIntent" do
-  if Tv.running?
+  if Tv.on?
     tell(Config::TV_ALREADY_ON)
   else
     Tv.on(true)
