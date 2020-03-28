@@ -12,7 +12,7 @@ while true
       mqtt_retry = 0
       if mqtt.new_message?
         state =  received_message
-        if state != motor.previous_state || state != light.previous_state state != tv.previous_state
+        if state != motor.previous_state || state != light.previous_state || state != tv.previous_state
           case state
           when "running"
             motor.update_state(state)
@@ -23,19 +23,19 @@ while true
             end
           when "on"
             light.update_state(state)
-            send_signal(0x41B6D52A) # Switch LIGHT ON
+            send_signal(0) # Switch LIGHT ON
             sleep(1)
           when "off"
             light.update_state(state)
-            send_signal(0x41B6D52A)  # Switch LIGHT OFF
+            send_signal(0)  # Switch LIGHT OFF
             sleep(1)
           when "tv_on"
             tv.update_state(state)
-            send_signal(0x1A2EEC3B)  # Switch TV ON
+            send_signal(1)  # Switch TV ON
             sleep(1)
           when "tv_off"
             tv.update_state(state)
-            send_signal(0x1A2EEC3B)  # Switch TV OFF
+            send_signal(1)  # Switch TV OFF
             sleep(1)
           end
         else

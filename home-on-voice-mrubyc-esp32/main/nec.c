@@ -13,9 +13,10 @@
 
 
 static const char* LOG_TAG = "TEST_LOG";
-//light: 41B6D52A ac: F20D03FC tv: 1A2EEC3B
+//light: 41B6D52A tv: 2FD48B7
 static const uint32_t LIGHT_ON =  0x41B6D52A;
 static const uint32_t LIGHT_OFF = 0x41B6D52A;
+static const uint32_t TV_ON = 0x2FD48B7;
 const rmt_channel_t RMT_CHANNEL = 0;
 const gpio_num_t IR_PIN = 19;
 const int  RMT_TX_CARRIER_EN = 1;   // Enable carrier for IR transmitter test with IR led
@@ -111,8 +112,20 @@ void setup_rmt_config() {
 //nec.c
 void c_send_signal(mrb_vm *vm, mrb_value *v, int argc)
 {
-    uint32_t send_data = (uint32_t) GET_INT_ARG(1);
-    esp_log_level_set(LOG_TAG, ESP_LOG_INFO);
-    ESP_LOGI(LOG_TAG, "SEND RMT DATA");
-    sendNECRCData(send_data);
+    // uint32_t send_data = LIGHT_ON;
+    unsigned int code = (uint32_t) GET_INT_ARG(1);
+    switch (code)
+    {
+      case 0:
+        sendNECRCData(LIGHT_ON);
+        ESP_LOGI(LOG_TAG, "SEND LIGHT RMT DATA");
+        break;
+      case 1:
+        sendNECRCData(TV_ON);
+        ESP_LOGI(LOG_TAG, "SEND TV RMT DATA");
+        break;
+      default:
+        ESP_LOGI(LOG_TAG, "WRONG INPUT");
+    }
+    //esp_log_level_set(LOG_TAG, ESP_LOG_INFO);
 }
