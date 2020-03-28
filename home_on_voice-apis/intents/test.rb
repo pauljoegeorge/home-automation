@@ -1,6 +1,7 @@
 # coding: utf-8
 require './lib/motor'
 require './lib/light'
+require './lib/tv'
 require './lib/config'
 
 intent "LaunchRequest" do
@@ -68,6 +69,34 @@ intent "LightOffIntent" do
     end
   else
     tell(Config::LIGHT_ALREADY_OFF)
+  end
+end
+
+intent "TvOnIntent" do
+  if Tv.on?
+    tell(Config::TV_ALREADY_ON)
+  else
+    Tv.on(true)
+    case Tv.state
+    when 'tv_on'
+      tell(Config::TV_SWITCHING_ON)
+    when 'error'
+      tell(Config::ERROR_MESSAGE)
+    end
+  end
+end
+
+intent "TvOffIntent" do
+  if Tv.running?
+    Tv.on(false)
+    case Tv.state
+    when 'tv_off'
+      tell(Config::TV_SWITCHING_OFF)
+    when 'tv_on'
+      tell(Config::ERROR_MESSAGE)
+    end
+  else
+    tell(Config::TV_ALREADY_OFF)
   end
 end
 

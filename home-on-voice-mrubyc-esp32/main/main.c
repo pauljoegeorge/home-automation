@@ -9,11 +9,13 @@
 #include "wifi.h"
 #include "mqtt_broker.h"
 #include "motor.h"
-#include "light.h"
+#include "nec.h"
 
 #include "models/motor.h"
 #include "models/light.h"
 #include "models/mqtt.h"
+#include "models/remote.h"
+#include "models/tv.h"
 #include "loops/master.h"
 
 #define MEMORY_SIZE (1024*40)
@@ -69,10 +71,12 @@ void app_main(void) {
   mrbc_define_method(0, mrbc_class_object, "set_servo_params", c_servo_params_initialize);
   mrbc_define_method(0, mrbc_class_object, "run_servo", c_run_servo_motor);
   mrbc_define_method(0, mrbc_class_object, "send_notification", c_send_notification);
-  mrbc_define_method(0, mrbc_class_object, "turn_light_on", rmt_example_nec_tx_task);
+  mrbc_define_method(0, mrbc_class_object, "send_signal", c_send_signal);
   mrbc_define_method(0, mrbc_class_object, "init_rmt_config", setup_rmt_config);
   mrbc_create_task(motor, 0);
   mrbc_create_task(light, 0);
+  mrbc_create_task(tv, 0);
+  mrbc_create_task(remote, 0);
   mrbc_create_task(mqtt, 0);
   mrbc_create_task(master, 0);
   mrbc_run();

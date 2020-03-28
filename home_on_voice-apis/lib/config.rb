@@ -15,4 +15,9 @@ module Config
   LIGHT_ALREADY_OFF = "Light has already turned off"
   LIGHT_SWITCHING_ON = "Switching light on"
   LIGHT_SWITCHING_OFF = "Switching light off"
+  #=========== TV ============#
+  TV_ALREADY_ON = "TV has already turned on "
+  TV_ALREADY_OFF = "TV has already turned off"
+  TV_SWITCHING_ON = "Switching TV on"
+  TV_SWITCHING_OFF = "Switching TV off"
 end
