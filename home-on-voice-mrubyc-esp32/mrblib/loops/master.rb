@@ -29,6 +29,10 @@ while true
             light.update_state(state)
             send_signal(0)  # Switch LIGHT OFF
             sleep(1)
+          when "dim_on"
+            light.update_state("on")
+            send_signal(2)  # Switch DIM LIGHT ON
+            sleep(1)
           when "tv_on"
             tv.update_state(state)
             send_signal(1)  # Switch TV ON
